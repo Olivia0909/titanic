@@ -6,30 +6,31 @@ from sklearn.linear_model import LogisticRegression
 
 def predict_survival(pclass, age, fare, alone, sex, embarked):
   
-    if pclass == "1st class":
+    print("pclass", pclass)
+    if pclass == "First class":
         pclass = 1
-    if pclass == "2nd class":
+    elif pclass == "Second class":
         pclass = 2
     else:
         pclass = 3
-    print(pclass)
+    print("pclass: ", pclass)
 
     if age <= 16:
         age = 0
-    if age > 16 and age <= 32:
+    elif age > 16 and age <= 32:
         age = 1
-    if age > 32 and age <= 48:
+    elif age > 32 and age <= 48:
         age = 2
-    if age > 48 and age <= 64:
+    elif age > 48 and age <= 64:
         age = 3
     else:
         age = 4
 
     if fare <= 8:
         fare = 0
-    if fare > 8 and fare <= 14:
+    elif fare > 8 and fare <= 14:
         fare = 1
-    if fare > 14 and fare <= 31:
+    elif fare > 14 and fare <= 31:
         fare = 2
     else:
         fare = 3
@@ -41,14 +42,14 @@ def predict_survival(pclass, age, fare, alone, sex, embarked):
     
     if sex == "Male":
         sex = 0
-    if sex == "Female":
+    elif sex == "Female":
         sex = 1
     
     if embarked == "Southhampton":
         embarked = 0
-    if embarked == "Queenstown":
+    elif embarked == "Queenstown":
         embarked = 1
-    if embarked == "Cherbourg":
+    elif embarked == "Cherbourg":
         embarked = 2
     
     df1 = pd.read_csv("data.csv")
@@ -72,7 +73,7 @@ def main():
 
     pclass = st.selectbox(
         'Selected your class',
-        ('1st class', '2nd class', '3rd class'))
+        ('First class', 'Second class', 'Third class'))
 
     age = st.slider('How old are you?', 0, 80, 40)
 
@@ -92,9 +93,7 @@ def main():
 
     embarked = st.radio(
         "Where did you embark from",
-        ["Southhampton", "Queenstown", "Cherbourg"],
-     index=None,
-    )
+    ("Southhampton", "Queenstown", "Cherbourg"))
     st.button("Submit", type="primary", on_click=predict_survival(pclass, age, fare, alone, sex, embarked))
     
 
