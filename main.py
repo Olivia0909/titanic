@@ -59,7 +59,7 @@ def predict_survival(pclass, age, fare, alone, sex, embarked):
     y = df1['Survived']
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 101)
     lr = LogisticRegression()
-    lr.fit(X_train, y_train)
+    lr.fit(X_train.values, y_train.values)
     result = lr.predict([[pclass, embarked, age, sex, fare, alone]])
     
     if result[0] == 0:
